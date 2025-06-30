@@ -1,5 +1,3 @@
-# utils.py
-
 import base64
 
 def encode_channel_id(channel_id: int) -> str:
