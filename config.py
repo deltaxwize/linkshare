@@ -1,7 +1,7 @@
-# config.py
-
-API_ID = 12345678  # Replace with your actual API ID
-API_HASH = "your_api_hash"
-BOT_TOKEN = "your_bot_token"
-MONGO_URI = "mongodb+srv://username:password@cluster.mongodb.net/invite_bot"
-ADMINS = [123456789]  # Replace with your Telegram user ID(s)
+API_ID = 12345678
+API_HASH = "24c3a9d"
+BOT_TOKEN = "7899"
+MONGO_URI = ""
+ADMINS = [7086472788]  # Replace with your Telegram user ID(s)
+START_PIC = "https://images6.alphacoders.com/132/1323207.jpeg"
+LINK_PIC = "https://images7.alphacoders.com/132/1323209.jpeg"
