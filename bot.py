@@ -1,3 +1,4 @@
+# bot.py
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
@@ -19,19 +20,12 @@ channels_col = db['channels']
 async def start_handler(_, message: Message):
     users_col.update_one({"_id": message.from_user.id}, {"$set": {"name": message.from_user.first_name}}, upsert=True)
     args = message.text.split(" ", 1)
+    start_text = ("<b><blockquote>𝖡𝖺𝗄𝗄𝖺 {mention}!\n\n𝖨’𝗆 𝗍𝗁𝖾 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 𝖫𝗂𝗇𝗄 𝖡𝗈𝗍 — 𝖨 𝖼𝗋𝖾𝖺𝗍𝖾 𝗌𝗆𝖺𝗋𝗍 𝗋𝖾𝖽𝗂𝗋𝖾𝖼𝗍 𝗅𝗂𝗇𝗄𝗌 𝖿𝗈𝗋 𝗒𝗈𝗎𝗋 𝖳𝖾𝗅𝖾𝗀𝗋𝖺𝗆 𝖼𝗁𝖺𝗇𝗇𝖾𝗅𝗌 𝗍𝗈 𝗁𝖾𝗅𝗉 𝖺𝗏𝗈𝗂𝖽 𝖼𝗈𝗉𝗒𝗋𝗂𝗀𝗁𝗍 𝗉𝗋𝗈𝖻𝗅𝖾𝗆𝗌 𝖺𝗇𝖽 𝗄𝖾𝖾𝗉 𝗍𝗁𝗂𝗇𝗀𝗌 𝗌𝖺𝖿𝖾.</blockquote></b>")
     if len(args) == 1:
-        start_text = (
-            "<b><blockquote>𝖡𝖺𝗄𝗄𝖺 {mention}!\n\n"
-            "𝖨’𝗆 𝗍𝗁𝖾 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 𝖫𝗂𝗇𝗄 𝖡𝗈𝗍 — 𝖨 𝖼𝗋𝖾𝖺𝗍𝖾 𝗌𝗆𝖺𝗋𝗍 𝗋𝖾𝖽𝗂𝗋𝖾𝖼𝗍 𝗅𝗂𝗇𝗄𝗌 𝖿𝗈𝗋 𝗒𝗈𝗎𝗋 𝖳𝖾𝗅𝖾𝗀𝗋𝖺𝗆 𝖼𝗁𝖺𝗇𝗇𝖾𝗅𝗌 𝗍𝗈 𝗁𝖾𝗅𝗉 𝖺𝗏𝗈𝗂𝖽 𝖼𝗈𝗉𝗒𝗋𝗂𝗀𝗁𝗍 𝗉𝗋𝗈𝖻𝗅𝖾𝗆𝗌 𝖺𝗇𝖽 𝗄𝖾𝖾𝗉 𝗍𝗁𝗂𝗇𝗀𝗌 𝗌𝖺𝖿𝖾.</blockquote></b>"
+        return await message.reply_photo(
+            START_PIC,
+            caption=start_text
         )
-        if 'START_PIC' in globals() and START_PIC:
-            return await message.reply_photo(
-                START_PIC,
-                caption=start_text,
-                disable_web_page_preview=True
-            )
-        else:
-            return await message.reply(start_text)
     param = args[1]
     is_req = False
     if param.startswith("req_"):
@@ -66,8 +60,7 @@ async def start_handler(_, message: Message):
                     caption=text,
                     reply_markup=InlineKeyboardMarkup(
                         [[InlineKeyboardButton("「𝖱𝖾𝗊𝗎𝖾𝗌𝗍 𝗍𝗈 𝖩𝗈𝗂𝗇」", url=invite.invite_link)]]
-                    ),
-                    disable_web_page_preview=True
+                    )
                 )
             else:
                 sent = await message.reply(
@@ -92,12 +85,23 @@ async def start_handler(_, message: Message):
                 expire_date=datetime.utcnow() + timedelta(minutes=10),
                 member_limit=1
             )
-            sent = await message.reply(
-                "𝖧𝖾𝗋𝖾 𝗂𝗌 𝗒𝗈𝗎𝗋 𝗅𝗂𝗇𝗄! 𝖢𝗅𝗂𝖼𝗄 𝖻𝖾𝗅𝗈𝗐 𝗍𝗈 𝗉𝗋𝗈𝖼𝖾𝖾𝖽: 𝗉𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 @Bots_Nation",
-                reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("「𝖩𝗈𝗂𝗇 𝖢𝗁𝖺𝗇𝗇𝖾𝗅」", url=invite.invite_link)]]
+            text = "𝖧𝖾𝗋𝖾 𝗂𝗌 𝗒𝗈𝗎𝗋 𝗅𝗂𝗇𝗄! 𝖢𝗅𝗂𝖼𝗄 𝖻𝖾𝗅𝗈𝗐 𝗍𝗈 𝗉𝗋𝗈𝖼𝖾𝖾𝗅: 𝗉𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 @Bots_Nation"
+            if 'LINK_PIC' in globals() and LINK_PIC:
+                sent = await message.reply_photo(
+                    LINK_PIC,
+                    caption=text,
+                    reply_markup=InlineKeyboardMarkup(
+                        [[InlineKeyboardButton("「𝖩𝗈𝗂𝗇 𝖢𝗁𝖺𝗇𝗇𝖾𝗅」", url=invite.invite_link)]]
+                    )
                 )
-            )
+            else:
+                sent = await message.reply(
+                    text,
+                    reply_markup=InlineKeyboardMarkup(
+                        [[InlineKeyboardButton("「𝖩𝗈𝗂𝗇 𝖢𝗁𝖺𝗇𝗇𝖾𝗅」", url=invite.invite_link)]]
+                    ),
+                    disable_web_page_preview=True
+                )
             await asyncio.sleep(600)
             try:
                 await app.revoke_chat_invite_link(channel_id, invite.invite_link)
@@ -162,7 +166,7 @@ async def set_channel(_, message: Message):
             upsert=True
         )
         await message.reply(
-            f"{str(chat.type).title()} '{chat.title}' 𝗋𝖾𝗀𝗂𝗌𝗍𝖾𝗋𝖾𝖽.\n"
+            f"{chat.type.name.title()} '{chat.title}' 𝗋𝖾𝗀𝗂𝗌𝗍𝖾𝗋𝖾𝖽.\n"
             f"𝖨𝖣: `{chat.id}`\n"
             f"𝖴𝗌𝖾𝗋𝗇𝖺𝗆𝖾: @{chat.username if chat.username else 'N/A'}"
         )
@@ -190,7 +194,7 @@ async def delete_channel(_, message: Message):
         chat = await app.get_chat(chat_ref)
         result = channels_col.delete_one({"_id": chat.id})
         if result.deleted_count:
-            await message.reply(f"{chat.type.title()} '{chat.title}' 𝗋𝖾𝗆𝗈𝗏𝖾𝖽.")
+            await message.reply(f"{chat.type.name.title()} '{chat.title}' 𝗋𝖾𝗆𝗈𝗏𝖾𝖽.")
         else:
             await message.reply("𝖢𝗁𝖺𝗇𝗇𝖾𝗅/𝗀𝗋𝗈𝗎𝗉 𝗇𝗈𝗍 𝖿𝗈𝗎𝗇𝖽.")
     except Exception as e:
@@ -227,7 +231,7 @@ async def channel_post(_, message: Message):
         try:
             encoded = encode_channel_id(ch['_id'])
             link = f"https://t.me/{app.me.username}?start={encoded}"
-            links.append(f"<b>{ch.get('title', ch.get('username', ch['_id']))}</b>: <a href='{link}'>Click here</a>")
+            links.append(f"<b>{ch.get('title', ch.get('username', ch['_id']))}</b>: <a href='{link}'>𝖢𝗅𝗂𝖼𝗄 𝗁𝖾𝗋𝖾</a>")
         except Exception as e:
             links.append(f"❌ {ch.get('username', ch.get('title', ch['_id']))}: {e}")
     await message.reply("\n".join(links), disable_web_page_preview=True)
@@ -265,7 +269,7 @@ async def req_post(_, message: Message):
             encoded = encode_channel_id(ch['_id'])
             link = f"https://t.me/{app.me.username}?start=req_{encoded}"
             links.append(
-                f"<b>{ch.get('title', ch.get('username', ch['_id']))}</b>: <a href='{link}'>𝖱𝖾𝗊𝗎𝖾𝗌𝗍 𝗍𝗈 𝖩𝗈𝗂𝗇</𝖺> (𝗋𝖾𝗊𝗎𝗂𝗋𝖾𝗌 𝖺𝖽𝗆𝗂𝗇 𝖺𝗉𝗉𝗋𝗈𝗏𝖺𝗅)"
+                f"<b>{ch.get('title', ch.get('username', ch['_id']))}</b>: <a href='{link}'>𝖱𝖾𝗊𝗎𝖾𝗌𝗍 𝗍𝗈 𝖩𝗈𝗂𝗇</a> (𝗋𝖾𝗊𝗎𝗂𝗋𝖾𝗌 𝖺𝖽𝗆𝗂𝗇 𝖺𝗉𝗉𝗋𝗈𝗏𝖺𝗅)"
             )
         except Exception as e:
             links.append(f"❌ {ch.get('username', ch.get('title', ch['_id']))}: {e}")
