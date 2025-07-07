@@ -1,5 +1,5 @@
-API_ID = 12345678
-API_HASH = "24c3a9d"
+API_ID = 29245477
+API_HASH = "0abc83883262245c90ca337b7a0375c4"
 BOT_TOKEN = "7899"
 MONGO_URI = ""
 ADMINS = [7086472788]  # Replace with your Telegram user ID(s)
