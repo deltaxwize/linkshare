@@ -5,4 +5,3 @@ MONGO_URI = "mongodb+srv://Kafka:Au3OoWzCDYJKeuHU@cluster0.lz2m8iy.mongodb.net/?
 ADMINS = [7654385403]  # Replace with your Telegram user ID(s)
 START_PIC = "https://litter.catbox.moe/bxry4e.jpg"
 LINK_PIC = "https://files.catbox.moe/gyklg0.jpg"
-PORT = "8080"
