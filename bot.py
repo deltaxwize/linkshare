@@ -283,22 +283,3 @@ async def stats(_, message: Message):
     await message.reply(f"𝖴𝗌𝖾𝗋𝗌: {user_count}\n𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌: {channel_count}")
 
 app.run()
-
-
-app = web.Application()
-
-async def handle(request):
-    return web.Response(text="Hello from your bot!")
-
-app.router.add_get("/", handle)
-
-async def start_bot():
-    runner = web.AppRunner(app)
-    await runner.setup()
-
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
-    await site.start()
-    print("✅ Web server running on http://0.0.0.0:8080")
-
-# ❗️This MUST be called like this at the bottom:
-asyncio.run(start_bot())
