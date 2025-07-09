@@ -285,15 +285,20 @@ async def stats(_, message: Message):
 app.run()
 
 
+app = web.Application()
 
 async def handle(request):
-    return web.Response(text="Hello, world")
+    return web.Response(text="Hello from your bot!")
 
-app = web.Application()
-app.router.add_get('/', handle)
+app.router.add_get("/", handle)
 
-# Set up the runner and site
-runner = web.AppRunner(app)
-await runner.setup()
-site = web.TCPSite(runner, host='0.0.0.0', port=8080)
-await site.start()
+async def start_bot():
+    runner = web.AppRunner(app)
+    await runner.setup()
+
+    site = web.TCPSite(runner, "0.0.0.0", 8080)
+    await site.start()
+    print("✅ Web server running on http://0.0.0.0:8080")
+
+# ❗️This MUST be called like this at the bottom:
+asyncio.run(start_bot())
