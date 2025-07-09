@@ -9,6 +9,7 @@ from config import API_ID, API_HASH, BOT_TOKEN, MONGO_URI, ADMINS, START_PIC, LI
 from utils import encode_channel_id, decode_channel_id
 from datetime import datetime, timedelta
 from pyrogram.enums import ChatType
+from asyncio import web
 
 app = Client("invite_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 mongo = MongoClient(MONGO_URI)
@@ -285,7 +286,7 @@ app.run()
 
 
 
-from asyncio import web
+
 
 async def health_check(request):
     return web.Response(text="OK")
