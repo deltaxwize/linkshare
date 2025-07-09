@@ -1,4 +1,6 @@
 # bot.py
+import aiohttp
+import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
@@ -9,7 +11,7 @@ from config import API_ID, API_HASH, BOT_TOKEN, MONGO_URI, ADMINS, START_PIC, LI
 from utils import encode_channel_id, decode_channel_id
 from datetime import datetime, timedelta
 from pyrogram.enums import ChatType
-from asyncio import web
+from webhook import start_webhook
 
 app = Client("invite_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 mongo = MongoClient(MONGO_URI)
@@ -288,13 +290,12 @@ app.run()
 
 
 
-async def health_check(request):
-    return web.Response(text="OK")
+async def main():
+    await app.start()
+    print("Bot is running...")
+    asyncio.create_task(news_feed_loop(app, db, global_settings_collection, [URL_A]))
+    await asyncio.Event().wait()
 
-async def run_health_server():
-    app = web.Application()
-    app.router.add_get("/healthz", health_check)
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
-    await site.start()
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
