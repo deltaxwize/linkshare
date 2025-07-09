@@ -1,5 +1,4 @@
 # bot.py
-import aiohttp
 import asyncio
 from asyncio import web
 from pyrogram import Client, filters
@@ -292,13 +291,68 @@ async def stats(_, message: Message):
 
 app.run()
 
-async def health_check(request):
-    return web.Response(text="OK")
 
-async def run_health_server():
-    app = web.Application()
-    app.router.add_get("/healthz", health_check)
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
-    await site.start()
+
+    async def start(self):
+        await super().start()
+        usr_bot_me = await self.get_me()
+        self.uptime = datetime.now()
+
+        try:
+            db_channel = await self.get_chat(CHANNEL_ID)
+            self.db_channel = db_channel
+            test = await self.send_message(chat_id = db_channel.id, text = "Test Message")
+            await test.delete()
+        except Exception as e:
+            self.LOGGER(__name__).warning(e)
+            self.LOGGER(__name__).warning(f"Make Sure bot is Admin in DB Channel, and Double check the CHANNEL_ID Value, Current Value {CHANNEL_ID}")
+            self.LOGGER(__name__).info("\nBot Stopped. Join https://t.me/CodeflixSupport for support")
+            sys.exit()
+
+        self.set_parse_mode(ParseMode.HTML)
+        self.LOGGER(__name__).info("""Bot Running..!\n
+
+ █████╗ ███╗   ██╗██╗███╗   ███╗███████╗
+██╔══██╗████╗  ██║██║████╗ ████║██╔════╝
+███████║██╔██╗ ██║██║██╔████╔██║█████╗  
+██╔══██║██║╚██╗██║██║██║╚██╔╝██║██╔══╝  
+██║  ██║██║ ╚████║██║██║ ╚═╝ ██║███████╗
+╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝     ╚═╝╚══════╝
+
+███████╗████████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+███████╗   ██║   ███████║   ██║   ██║██║   ██║██╔██╗ ██║
+╚════██║   ██║   ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+███████║   ██║   ██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+""")
+        self.LOGGER(__name__).info(f"""BOT DEPLOYED BY @AS_NETWORKS""")
+
+        self.set_parse_mode(ParseMode.HTML)
+        self.username = usr_bot_me.username
+        self.LOGGER(__name__).info(f"Bot Running..! Made by @Animes_Station")   
+
+        # Start Web Server
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        await web.TCPSite(app, "0.0.0.0", PORT).start()
+
+
+        try: await self.send_message(OWNER_ID, text = f"<b><blockquote> Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ ♻️</blockquote></b>")
+        except: pass
+
+    async def stop(self, *args):
+        await super().stop()
+        self.LOGGER(__name__).info("Bot stopped.")
+
+    def run(self):
+        """Run the bot."""
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.start())
+        self.LOGGER(__name__).info("Bot is now running. Thanks to @IntrovertSama")
+        try:
+            loop.run_forever()
+        except KeyboardInterrupt:
+            self.LOGGER(__name__).info("Shutting down...")
+        finally:
+            loop.run_until_complete(self.stop())
