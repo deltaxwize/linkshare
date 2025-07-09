@@ -3,7 +3,7 @@
 ![Miku Nakano](https://images7.alphacoders.com/132/1323209.jpeg)
 
 A Telegram bot to generate smart, temporary, and request-based invite links for your channels and groups.  
-Helps you avoid copyright problems and keep your communities safe.
+Helps you avoid problems and keep your communities safe.
 
 ---
 
