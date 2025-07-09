@@ -70,7 +70,7 @@ async def start_handler(_, message: Message):
                     ),
                     disable_web_page_preview=True
                 )
-            await asyncio.sleep(600)
+            await asyncio.sleep(60)
             try:
                 await app.revoke_chat_invite_link(channel_id, invite.invite_link)
             except:
@@ -102,7 +102,7 @@ async def start_handler(_, message: Message):
                     ),
                     disable_web_page_preview=True
                 )
-            await asyncio.sleep(600)
+            await asyncio.sleep(60)
             try:
                 await app.revoke_chat_invite_link(channel_id, invite.invite_link)
             except:
