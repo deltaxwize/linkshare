@@ -282,3 +282,18 @@ async def stats(_, message: Message):
     await message.reply(f"𝖴𝗌𝖾𝗋𝗌: {user_count}\n𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌: {channel_count}")
 
 app.run()
+
+
+
+from asyncio import web
+
+async def health_check(request):
+    return web.Response(text="OK")
+
+async def run_health_server():
+    app = web.Application()
+    app.router.add_get("/healthz", health_check)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", 8080)
+    await site.start()
