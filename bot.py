@@ -9,6 +9,7 @@ from config import API_ID, API_HASH, BOT_TOKEN, MONGO_URI, ADMINS, START_PIC, LI
 from utils import encode_channel_id, decode_channel_id
 from datetime import datetime, timedelta
 from pyrogram.enums import ChatType
+from aiohttp import web
 
 app = Client("invite_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 mongo = MongoClient(MONGO_URI)
@@ -282,3 +283,17 @@ async def stats(_, message: Message):
     await message.reply(f"𝖴𝗌𝖾𝗋𝗌: {user_count}\n𝖢𝗁𝖺𝗇𝗇𝖾𝗅𝗌: {channel_count}")
 
 app.run()
+
+
+
+async def handle(request):
+    return web.Response(text="Hello, world")
+
+app = web.Application()
+app.router.add_get('/', handle)
+
+# Set up the runner and site
+runner = web.AppRunner(app)
+await runner.setup()
+site = web.TCPSite(runner, host='0.0.0.0', port=8080)
+await site.start()
