@@ -12,13 +12,7 @@ from utils import encode_channel_id, decode_channel_id
 from datetime import datetime, timedelta
 from pyrogram.enums import ChatType
 
-
-app = Client(
-    name="invite_bot",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=BOT_TOKEN  # ✅ This line is REQUIRED!
-)
+app = Client(name="invite_bot", api_id=API_ID, api_hash=API_HASH,bot_token=BOT_TOKEN)
 mongo = MongoClient(MONGO_URI)
 db = mongo['invite_bot']
 users_col = db['users']
