@@ -170,8 +170,8 @@ LINK_PIC = "https://wallpaper.forfun.com/fetch/72/72d9ab0c3dfa4777c626ce6b8e0567
 
 ## Community
 
-- Updates Channel: [@Bots_Nation](https://t.me/Bots_Nation)
-- Support Group: [@Bots_Nation_Support](https://t.me/Bots_Nation_Support)
+- Updates Channel: [@ALLHQC](https://t.me/ALLHQC)
+- Support Group: [@ALLHQC_Support](https://t.me/ALLHQC_Support)
 
 ---
 
