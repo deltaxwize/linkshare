@@ -106,7 +106,7 @@ LINK_PIC = "https://wallpaper.forfun.com/fetch/72/72d9ab0c3dfa4777c626ce6b8e0567
 
 1. Clone the repo:
     ```bash
-    git clone https://github.com/DARKXSIDE78/Channel-Link-Bot.git
+    git clone https://github.com/ALLHQC/Channel-Link-Bot.git
     cd Channel-Link-Bot
     ```
 2. Install requirements:
@@ -170,8 +170,8 @@ LINK_PIC = "https://wallpaper.forfun.com/fetch/72/72d9ab0c3dfa4777c626ce6b8e0567
 
 ## Community
 
-- Updates Channel: [@Bots_Nation](https://t.me/Bots_Nation)
-- Support Group: [@Bots_Nation_Support](https://t.me/Bots_Nation_Support)
+- Updates Channel: [@ALLHQC](https://t.me/ALLHQC)
+- Support Group: [@ALLHQC](https://t.me/ALLHQC)
 
 ---
 
@@ -179,7 +179,7 @@ LINK_PIC = "https://wallpaper.forfun.com/fetch/72/72d9ab0c3dfa4777c626ce6b8e0567
 
 - Powered by [Pyrogram](https://docs.pyrogram.org/) and [MongoDB](https://www.mongodb.com/).
 - Miku Nakano images © respective artists.
-- **Speical Thanks to [DARKXSIDE78](https://t.me/DARKXSIDE78) for creating this bot!**
+- **Speical Thanks to [ALLHQC](https://t.me/ALLHQC) for creating this bot!**
 
 ---
 
